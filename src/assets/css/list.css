@@ -1,0 +1,49 @@
+.blogs i{
+    color:#5FC6E8;
+}
+.blogs {
+    padding: 30px 0;
+    position: relative;
+    border-bottom: #BFAB86 1px solid;
+    overflow: hidden;
+}
+.blogs h3 a:hover {
+    color: #066;
+    text-decoration: underline;
+}
+.blogs h3 a {
+    color: #474645;
+    font-size:18px;
+}
+.blogs figure {
+    float: left;
+    width: 25%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.blogs>div{
+    float: right;
+    line-height: 22px;
+    width: 72%;
+    color: #777;
+}
+/* .blogs h3 {
+    font-size: 16px;
+    font-weight: bold;
+    transition: all .5s;
+    margin-bottom: 5px;
+} */
+/* .blogs p,.blogs span,.blogs b{
+    font: 12px/1.5 'Microsoft Yahei', 'Simsun';
+    line-height:22px;
+} */
+.blogs b{
+    float:right;
+    margin-right:20px;
+    margin-left:20px;
+    margin-top:2px;
+}
+ul,li,ol{
+    margin:0;
+    padding:0;
+}
