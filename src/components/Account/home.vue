@@ -3,12 +3,10 @@
       <div class="logo"></div>
         <div class="side" :style="{height:h}">
             <el-menu
-                default-active="2"
+                default-active="1-1"
                 class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-                unique-opened="true">
-                <el-submenu index="1">
+                unique-opened="false">
+                <el-submenu index="1-1">
                     <template slot="title">
                     <i class="el-icon-location"></i>
                     <span>博客管理</span>

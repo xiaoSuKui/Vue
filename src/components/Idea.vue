@@ -2,18 +2,21 @@
   <div>
       <h2>
            <span>
-              <a href="javascript:;">共(50)篇文章&nbsp;&nbsp;</a>
+              <a href="javascript:;">共({{count}})篇日记&nbsp;&nbsp;</a>
            </span>
            每日一记
       </h2>
 
       <div class="mood" v-for="value in list" :key="value.length">
-        <div><span style="display:inline-block;width:34px;height:34px;background-image: url(/static/images/5a264fb63362b.png);"></span><span style="display:inline-block;position:relative;bottom:10px;left:5px;">{{value.title}}</span></div>
+        <div><span style="display:inline-block;width:34px;height:34px;" :style="{background:'url(https://cdn.heweather.com/cond_icon/'+value.cond_code+'.png)'}"></span><span style="display:inline-block;position:relative;bottom:10px;left:5px;">{{value.title}}</span></div>
 		<!--内容区-->
-		<div style="margin-left:40px;border:none;margin-right: 10px;margin-bottom:10px;">{{value.content}}
+		<div style="margin-left:40px;border:none;margin-right: 10px;margin-bottom:10px;" v-html="value.content">
+		</div>
+        <div class="images" v-if="value.img">
+			<img v-for="image in value.img.split(',')" :src="image" width="33.3333%">
 		</div>
 		<!--页脚，放置补充信息或支持的操作-->
-		<div style="font-size:11px;padding-bottom:0;text-align:right;position:relative;left:66px;">{{value.posted_time}} 发表于{{value.posted_site}}</div>
+		<div style="font-size:11px;padding-bottom:0;text-align:right;position:relative;left:66px;">{{value.posted_time}} {{value.weather}} 发表于{{value.posted_site}} </div>
       </div>
       <h1 style="textalign:center" v-if="no">没有更多日记加载了...</h1>
   </div>
@@ -27,11 +30,18 @@ import axios from 'axios'
                 list:[],
                 num:0,
                 no:false,
+                count:0
             }
         },
         mounted:function(){
             this.$http.get(this.$store.state.hostaddr+"/article/ideaList.php?num=0").then((response)=>{
-                this.list=response.data;
+                
+                // response.data.forEach((val,i)=>{
+                //     console.log(val.content);
+                //     val.content=val.content.replace(/\r\n/ig, "<br>");
+                // })
+                this.list=response.data.data;
+                this.count=response.data.count[0];
                 console.log(this.list);
             }); 
             // 设置一个开关来避免重负请求数据
@@ -43,10 +53,10 @@ import axios from 'axios'
                         sw = false;
                          this.num+=10;
                         axios.get(this.$store.state.hostaddr+"/article/ideaList.php?num="+this.num).then((response)=>{
-                        if(response.data==""){
+                        if(response.data.data==""){
                             this.no=true;
                         }
-                        (response.data).forEach((val,index)=>{
+                        (response.data.data).forEach((val,index)=>{
                             this.list.push(val);
                         })
                         sw = true;
