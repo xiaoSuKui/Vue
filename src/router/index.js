@@ -13,7 +13,7 @@ import ArticleList from '@/components/ArticleList'
 import Article from '@/components/Article'
 import Idea from '@/components/Idea'
 // 后台
-import Login from '@/components/Account/login'
+import Login from '@/components/Account/Login'
 import AccountHome from '@/components/Account/home'
 import AccountArticle from '@/components/Account/article'
 
@@ -38,7 +38,16 @@ export default new Router({
       ]
     },
     {
+      path: '/login',
+      component: Login,
+      name: '',
+    },
+    // hidden: true
+    {
       path:'/Account',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
       component:AccountHome,
       children:[
         {path:'/',redirect:'/Account/article'},
