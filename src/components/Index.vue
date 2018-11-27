@@ -29,16 +29,18 @@
             </div>
         </div>
       </div>
-
+      <Footer></Footer>
       <!-- 返回顶部 -->
       <el-button @click="toTop"  icon="el-icon-arrow-up" circle class="toTop"></el-button>
   </div>
 </template>
 <script>
     import Header from '@/components/Header'
+    import Footer from '@/components/Footer'
     export default{
         components:{
-            Header:Header
+            Header:Header,
+            Footer:Footer
         },
         data(){
             return{

@@ -1,6 +1,6 @@
 # htdocs2
 
-> A Vue.js project
+> vue项目
 
 ## Build Setup
 

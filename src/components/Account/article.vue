@@ -100,6 +100,7 @@ export default {
             this.$refs.upload.submit();
         },
         handleAvatarSuccess(res, file,$e) {
+            console.log(this.$refs.upload);
             this.form.imageUrl = res;
             this.i=false;
             this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&html='+encodeURIComponent(this.form.html)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
@@ -125,9 +126,16 @@ export default {
         },
         onSubmit() {
             if(!this.form.date) this.form.date=new Date().getTime();
-            this.$refs.upload.submit();     //触发预览图的图片上传
+            if(this.$refs.upload.$data.uploadFiles.length==0){
+                this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&html='+encodeURIComponent(this.form.html)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
+                console.log(response.data);
+                location.assign("/home");
+             })
+            }else{
+                this.$refs.upload.submit();     //触发预览图的图片上传
+            }
             
-        }   
+        },
     },
     components: {
       mavonEditor
