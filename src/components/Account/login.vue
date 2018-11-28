@@ -2,46 +2,47 @@
   <el-form   class="demo-ruleForm login-container">
     <h3 class="title">系统登录</h3>
     <el-form-item>
-      <el-input type="text"  placeholder="账号"></el-input>
+      <el-input type="text"  placeholder="账号" v-model="id"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-input type="password"  placeholder="密码"></el-input>
+      <el-input type="password"  placeholder="密码" v-model="pwd"></el-input>
     </el-form-item>
-    <el-checkbox checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" >登录</el-button>
-      <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
+      <el-button type="primary" style="width:100%;" @click="register" >登录</el-button>
     </el-form-item>
+    <img src="/static/images/login_x.gif" width="100%">
   </el-form>
 </template>
 
 <script>
-  // import { requestLogin } from '../api/api';
-  //import NProgress from 'nprogress'
+
   export default {
     data() {
       return {
-        // logining: false,
-        // ruleForm2: {
-        //   account: 'admin',
-        //   checkPass: '123456'
-        // },
-        // rules2: {
-        //   account: [
-        //     { required: true, message: '请输入账号', trigger: 'blur' },
-        //     //{ validator: validaePass }
-        //   ],
-        //   checkPass: [
-        //     { required: true, message: '请输入密码', trigger: 'blur' },
-        //     //{ validator: validaePass2 }
-        //   ]
-        // },
-        // checked: true
+        id:'',
+        pwd:'',
       };
     },
     methods: {
-     
-      
+     register(){
+        var formdata = new FormData();
+        formdata.append('uname',this.id);
+        formdata.append('upwd',this.pwd);
+       if(this.id&&this.pwd){
+         this.$http.post(this.$store.state.hostaddr+'/account/login.php',formdata).then((res)=>{
+           console.log(res);
+           if(res.data.code==1){
+              sessionStorage.setItem("uid",res.data.uid);
+              sessionStorage.setItem("uname",'admin');
+              location.assign("/account");
+           }else{
+             alert("用户名或密码不正确");
+           }
+         })
+       }else{
+         alert("请输入账号或密码");
+       }
+     }
     }
   }
 
@@ -49,12 +50,13 @@
 
 <style scoped>
   .login-container {
+    height:100vh;
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
-    margin: 180px auto;
+    margin: 0px auto;
     width: 350px;
     padding: 35px 35px 15px 35px;
     background: #fff;

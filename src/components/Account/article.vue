@@ -143,7 +143,7 @@ export default {
     mounted:function(){
         this.$http.get(this.$store.state.hostaddr+'/account/classify.php').then((response)=>{
                this.classify=response.data;
-               console.log(this.classify);
+            //    console.log(this.classify);
             })
     }
   }

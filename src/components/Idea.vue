@@ -8,7 +8,7 @@
       </h2>
 
       <div class="mood" v-for="value in list" :key="value.length">
-        <div><span style="display:inline-block;width:34px;height:34px;" :style="{background:'url(https://cdn.heweather.com/cond_icon/'+value.cond_code+'.png)'}"></span><span style="display:inline-block;position:relative;bottom:10px;left:5px;">{{value.title}}</span></div>
+        <div><img style="display:inline-block;width:34px;height:34px;" :src="'https://cdn.heweather.com/cond_icon/'+value.cond_code+'.png'"></img><span style="display:inline-block;position:relative;bottom:10px;left:5px;">{{value.title}}</span></div>
 		<!--内容区-->
 		<div style="margin-left:40px;border:none;margin-right: 10px;margin-bottom:10px;" v-html="value.content">
 		</div>
@@ -99,5 +99,8 @@ h2 span a {
     margin-bottom: 10px;
     border-radius: 5px;
     position:relative;
+}
+.images>img{
+    vertical-align: middle;
 }
 </style>

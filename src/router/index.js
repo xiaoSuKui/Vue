@@ -15,6 +15,7 @@ import Article from '@/components/Article'
 import Idea from '@/components/Idea'
 // 后台
 import Login from '@/components/Account/Login'
+import AccountIndex from '@/components/Account/index'
 import AccountHome from '@/components/Account/home'
 import AccountArticle from '@/components/Account/article'
 
@@ -49,10 +50,10 @@ export default new Router({
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
-      component:AccountHome,
+      component:AccountIndex,
       children:[
         {path:'/',redirect:'/Account/article'},
-        {path:'/Account/home',component:AccountArticle},
+        {path:'/Account/home',component:AccountIndex},
         {path:'/Account/article',component:AccountArticle}
       ]
     },
