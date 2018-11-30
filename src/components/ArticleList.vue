@@ -8,7 +8,7 @@
                     </figure>
                     <div style="min-height:140px;">
                         <h3 style="margin-bottom:0;"><a :href="'/article/'+value.aid" @click="new_href($event,value.category)">{{value.title}}</a></h3>
-                        <a :href="'/article/'+value.aid" @click="new_href($event,value.category)"><p style="color:#747F8C;">{{value.html.replace(/<.*?>/ig,'').slice(0,128)+"..."}}</p></a>
+                        <a :href="'/article/'+value.aid" @click="new_href($event,value.category)"><p style="color:#747F8C;">{{MarkdownIt.render(value.md).replace(/<.*?>/ig,'').slice(0,128)+"..."}}</p></a>
                         <div class="message" style="position:absolute;bottom:34px;">
                             <ul style="padding-left:0;">
                                 <el-tag size="small">{{value.category}}</el-tag>
@@ -23,17 +23,25 @@
 </template>
 <script>
 import axios from 'axios'
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
     export default{
         data(){
             return {
                 articleList:{},
                 num:0,
                 no:false,
+                MarkdownIt:''
             }
         },
         mounted:function(){
             this.$http.get(this.$store.state.hostaddr+"/article/articleList.php?num=0&path="+this.$router.history.current.path).then((response)=>{
+                //response=JSON.parse(response);
                 this.articleList=response.data;
+                this.MarkdownIt = mavonEditor.mixins[0].data().markdownIt;
+                console.log(this.articleList);
+                //this.articleList.html=MarkdownIt.render(this.articleList.md);
+                console.log(this.articleList.html);
             });
             // 设置一个开关来避免重负请求数据
             let sw = true;
@@ -44,6 +52,7 @@ import axios from 'axios'
                         sw = false;
                          this.num+=10;
                         axios.get(this.$store.state.hostaddr+"/article/articleList.php?num="+this.num+"&path="+this.$router.history.current.path).then((response)=>{
+                           // response=JSON.parse(response);
                         if(response.data==""){
                             this.no=true;
                         }

@@ -12,8 +12,7 @@
 	  		<span class="au02">{{article.posted_time}}</span>
 	  	</div>
           <!-- 文章内容 -->
-        <div class="article " style="overflow:hidden;" v-html="article.html">
-           
+        <div class="article " style="overflow:hidden;" v-html="Mark.render(article.md)">
         </div>
         <!-- 版权 -->
         <div class="copyright_author">
@@ -43,14 +42,18 @@ import Message from '@/components/Message'
     export default{
         data(){
             return {
-                article:[]
+                article:[],
+                result:'',
+                Mark:''
             }
         },
         mounted:function(){
             this.$http.get(this.$store.state.hostaddr+'/article/article.php?aid='+this.$route.params.aid).then((response)=>{
                this.article=response.data[0];
                 document.title=this.article.title;
+                this.Mark = mavonEditor.getMarkdownIt();
             });
+            
         },
         components: {
             mavonEditor,
