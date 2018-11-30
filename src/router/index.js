@@ -53,7 +53,7 @@ export default new Router({
       component:AccountIndex,
       children:[
         {path:'/',redirect:'/Account/article'},
-        {path:'/Account/home',component:AccountIndex},
+        {path:'/Account/home',component:AccountHome},
         {path:'/Account/article',component:AccountArticle}
       ]
     },
