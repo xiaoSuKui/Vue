@@ -7,11 +7,18 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import store from './vuex/store'
+import hljs from 'highlight.js';
 // 添加自定义过滤器
 import * as filters from './filters/'
 Object.keys(filters).forEach((key)=>{
   Vue.filter(key,filters[key]);
 });
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+    hljs.highlightBlock(block)
+  })
+})
 
 Vue.prototype.$http=axios;
 Vue.use(ElementUI);

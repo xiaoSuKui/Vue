@@ -12,7 +12,7 @@
 	  		<span class="au02">{{article.posted_time}}</span>
 	  	</div>
           <!-- 文章内容 -->
-        <div class="article " style="overflow:hidden;" v-html="Mark.render(article.md)">
+        <div class="article plaintext" v-highlight   style="overflow:hidden;" v-html="Mark">
         </div>
         <!-- 版权 -->
         <div class="copyright_author">
@@ -30,15 +30,16 @@
             </div>
             <div style="clear:both;"></div>
 		</div>
-        <mavon-editor style="height:0;width:0;display:none"></mavon-editor>
         <!-- 评论 -->
         <Message></Message>
     </div>
 </template>
 <script>
 import { mavonEditor } from 'mavon-editor'
+
 import 'mavon-editor/dist/css/index.css'
 import Message from '@/components/Message'
+import 'highlight.js/styles/github.css'
     export default{
         data(){
             return {
@@ -48,10 +49,12 @@ import Message from '@/components/Message'
             }
         },
         mounted:function(){
+            
             this.$http.get(this.$store.state.hostaddr+'/article/article.php?aid='+this.$route.params.aid).then((response)=>{
                this.article=response.data[0];
                 document.title=this.article.title;
-                this.Mark = mavonEditor.getMarkdownIt();
+               this.Mark=mavonEditor.mixins[0].data().markdownIt.render(this.article.md);
+
             });
             
         },
