@@ -129,7 +129,12 @@ export default {
             if(this.$refs.upload.$data.uploadFiles.length==0){
                 this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
                 console.log(response.data);
-                location.assign("/home");
+                if(response.data.code==1){
+                    this.$message({message: '发表成功',type: 'success'});
+                }else{
+                    this.$message.error('发表失败'+response.data);
+                }
+                //location.assign("/home");
              })
             }else{
                 this.$refs.upload.submit();     //触发预览图的图片上传

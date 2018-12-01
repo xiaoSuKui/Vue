@@ -12,7 +12,7 @@
 	  		<span class="au02">{{article.posted_time}}</span>
 	  	</div>
           <!-- 文章内容 -->
-        <div class="article plaintext" v-highlight   style="overflow:hidden;" v-html="Mark">
+        <div class="article plaintext" v-highlight   style="overflow:hidden;word-break: break-all;white-space: pre-wrap;" v-html="Mark">
         </div>
         <!-- 版权 -->
         <div class="copyright_author">
@@ -72,6 +72,11 @@ import 'highlight.js/styles/github.css'
 </script>
 
 <style>
+pre{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
 .article ul,.article ol{
     margin:fgdf;
     padding-left:40px;

@@ -18,7 +18,7 @@ import Login from '@/components/Account/Login'
 import AccountIndex from '@/components/Account/index'
 import AccountHome from '@/components/Account/home'
 import AccountArticle from '@/components/Account/article'
-
+import SkillList from '@/components/Account/SkillList'
 Vue.use(Router)
 
 export default new Router({
@@ -50,11 +50,12 @@ export default new Router({
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
-      component:AccountIndex,
+      component:AccountHome,
       children:[
-        {path:'/',redirect:'/Account/article'},
-        {path:'/Account/home',component:AccountHome},
-        {path:'/Account/article',component:AccountArticle}
+        {path:'/',redirect:'/Account/article',meta:{title: '文章编辑'}},
+        {path:'/Account/skillList',component:SkillList,meta:{name:'一技之长'}},
+        {path:'/Account/home',component:AccountHome,meta:{name:'主页'}},
+        {path:'/Account/article',component:AccountArticle,meta:{name: '文章编辑'}}
       ]
     },
     {
