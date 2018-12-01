@@ -53,6 +53,7 @@ import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import axios from 'axios'
 export default {
+    name:"article_acc",
      data() {
       return {
         form: {

@@ -53,9 +53,9 @@ export default new Router({
       component:AccountHome,
       children:[
         {path:'/',redirect:'/Account/article',meta:{title: '文章编辑'}},
-        {path:'/Account/skillList',component:SkillList,meta:{name:'一技之长'}},
-        {path:'/Account/home',component:AccountHome,meta:{name:'主页'}},
-        {path:'/Account/article',component:AccountArticle,meta:{name: '文章编辑'}}
+        {path:'/Account/skillList',component:SkillList,meta:{title:'一技之长'}},
+        {path:'/Account/home',component:AccountHome,meta:{title:'主页'}},
+        {path:'/Account/article',component:AccountArticle,meta:{title: '文章编辑'}}
       ]
     },
     {

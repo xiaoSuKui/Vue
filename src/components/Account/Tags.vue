@@ -71,8 +71,6 @@
                         path: route.fullPath,
                         name: route.matched[1].components.default.name
                     })
-                    console.log(this.tagsList);
-                    console.log(route.matched[1]);
                 }
                 bus.$emit('tags', this.tagsList);
             },
