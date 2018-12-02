@@ -67,9 +67,9 @@
                         this.tagsList.shift();
                     }
                     this.tagsList.push({
-                        title: route.meta.title,
-                        path: route.fullPath,
-                        name: route.matched[1].components.default.name
+                        title: route.meta.title,       //标题
+                        path: route.fullPath,          //路由地址
+                        name: route.matched[1].components.default.name  //组件里的name属性值，用于keep-alive缓存页面
                     })
                 }
                 bus.$emit('tags', this.tagsList);
