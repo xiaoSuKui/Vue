@@ -31,13 +31,14 @@ import 'mavon-editor/dist/css/index.css'
                 articleList:{},
                 num:0,
                 no:false,
-                MarkdownIt:''
+                MarkdownIt:'',
             }
         },
         mounted:function(){
             this.$http.get(this.$store.state.hostaddr+"/article/articleList.php?num=0&path="+this.$router.history.current.path).then((response)=>{
                 //response=JSON.parse(response);
-                this.articleList=response.data;
+                this.articleList=response.data.data;
+                this.$store.state.count=response.data.count[0];
                 this.MarkdownIt = mavonEditor.mixins[0].data().markdownIt;
                 console.log(this.articleList);
                 //this.articleList.html=MarkdownIt.render(this.articleList.md);
@@ -53,10 +54,10 @@ import 'mavon-editor/dist/css/index.css'
                          this.num+=10;
                         axios.get(this.$store.state.hostaddr+"/article/articleList.php?num="+this.num+"&path="+this.$router.history.current.path).then((response)=>{
                            // response=JSON.parse(response);
-                        if(response.data==""){
+                        if(response.data.data==""){
                             this.no=true;
                         }
-                        (response.data).forEach((val,index)=>{
+                        (response.data.data).forEach((val,index)=>{
                             this.articleList.push(val);
                         })
                         sw = true;
@@ -75,7 +76,7 @@ import 'mavon-editor/dist/css/index.css'
                  this.$store.commit('path_up',c);
                  this.$router.push(href);
             }
-        }
+        },
     }
 </script>
 <style>

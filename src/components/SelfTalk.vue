@@ -2,7 +2,7 @@
   <div>
       <h2>
            <span>
-              <a href="javascript:;">共(50)篇文章&nbsp;&nbsp;</a>
+              <a href="javascript:;">共({{$store.state.count}})篇文章&nbsp;&nbsp;</a>
            </span>
            生活杂谈
       </h2>
@@ -16,7 +16,7 @@
             ArticleList:ArticleList
         },
         mounted:function(){
-            
+           
         }
     }
 </script>

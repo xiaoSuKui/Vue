@@ -7,7 +7,8 @@ const state={
     // 导航地址、
     path:'/home',
     // 服务器地址
-    hostaddr:'http://zhaohs.cn/data'
+    hostaddr:'http://zhaohs.cn/data',
+    count:0,        //文章总数
 }
 const mutations={
     // 改变/更新导航地址调用的方法

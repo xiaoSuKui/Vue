@@ -11,8 +11,7 @@
         </div>
             <h2>
                 <span>
-                    <a href="/skill" @click="new_href($event)">一技之长(242)</a>
-                    <a href="/selfTalk" @click="new_href($event)">生活杂谈(33)</a>
+                    共({{$store.state.count}})篇文章&nbsp;&nbsp;
                 </span>
                 最新文章
             </h2>

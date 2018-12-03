@@ -44,7 +44,7 @@
     xmlhttp.onreadystatechange=function(res){
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            console.log(JSON.parse(res.currentTarget.responseText));
+            //console.log(JSON.parse(res.currentTarget.responseText));
             var TQ=JSON.parse(res.currentTarget.responseText).HeWeather6[0].now.cond_code;
             if(TQ>=400&&TQ<=499){
                 init();

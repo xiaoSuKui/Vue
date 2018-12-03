@@ -1,10 +1,8 @@
 <template>
   <el-table
-    :data="tableData"
+    :data="skillData"
     style="width: 100%"
-    stripe="true"
     size="medium"
-    highlight-current-row="true"
     :default-sort = "{prop: 'date', order: 'descending'}"
     >
     <el-table-column
@@ -22,7 +20,7 @@
     <el-table-column
       prop="address"
       label="地址"
-      :formatter="formatter">
+      >
     </el-table-column>
   </el-table>
 </template> 
@@ -31,8 +29,14 @@ export default {
   name:"skillList_acc",
   data(){
     return {
-
+      skillData:[]
     }
+  },
+  mounted:function(){
+    this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=/skill&num=0').then((res)=>{
+      console.log(res);
+      this.skillData=res;
+    })
   }
 }
 </script>
