@@ -18,7 +18,7 @@ import Login from '@/components/Account/Login'
 import AccountIndex from '@/components/Account/index'
 import AccountHome from '@/components/Account/home'
 import AccountArticle from '@/components/Account/article'
-import SkillList from '@/components/Account/SkillList'
+import AllList from '@/components/Account/AllList'
 Vue.use(Router)
 
 export default new Router({
@@ -53,7 +53,7 @@ export default new Router({
       component:AccountHome,
       children:[
         {path:'/',redirect:'/Account/article',meta:{title: '文章编辑'}},
-        {path:'/Account/skillList',component:SkillList,meta:{title:'一技之长'}},
+        {path:'/Account/allList',component:AllList,meta:{title:'文章列表'}},
         {path:'/Account/home',component:AccountHome,meta:{title:'主页'}},
         {path:'/Account/article',component:AccountArticle,meta:{title: '文章编辑'}}
       ]

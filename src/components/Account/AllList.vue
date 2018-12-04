@@ -1,4 +1,16 @@
 <template>
+<div>
+  <el-form :inline="true">
+    <el-form-item>
+      <el-input v-model="search"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button @click="onSearch">查询</el-button>
+    </el-form-item>
+    <el-form-item>
+      <el-button @click="onToArticle">新增</el-button>
+    </el-form-item>
+  </el-form>
   <el-table
     :data="skillData"
     style="width: 100%"
@@ -29,21 +41,36 @@
       label="内容"
       >
     </el-table-column>
+    <el-table-column
+      prop="category"
+      label="分类"
+      >
+    </el-table-column>
   </el-table>
+</div>
 </template> 
 <script>
 export default {
   name:"skillList_acc",
   data(){
     return {
+      search:"",
       skillData:[]
     }
   },
   mounted:function(){
-    this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=/skill&num=0').then((res)=>{
+    this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=all&num=0').then((res)=>{
       console.log(res);
       this.skillData=res.data.data;
     })
+  },
+  methods:{
+    onToArticle(){
+      this.$router.push('/account/article');
+    },
+    onSearch(){
+      console.log("xxx");
+    }
   }
 }
 </script>

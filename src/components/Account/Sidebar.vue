@@ -50,22 +50,22 @@
                     },
                     {
                         icon: 'el-ali-slidebar_yuyuedingdan',
-                        index: '3',
-                        title: '文章列表',
-                        subs: [
-                            {
-                                index: 'skillList',
-                                title: '一技之长'
-                            },
-                            {
-                                index: 'zatan',
-                                title: '生活杂谈',
-                            },
-                            {
-                                index: 'yiji',
-                                title: '每日一记'
-                            }
-                        ]
+                        index: 'allList',
+                        title: '文章列表'
+                        // subs: [
+                        //     {
+                        //         index: 'skillList',
+                        //         title: '一技之长'
+                        //     },
+                        //     {
+                        //         index: 'zatan',
+                        //         title: '生活杂谈',
+                        //     },
+                        //     {
+                        //         index: 'yiji',
+                        //         title: '每日一记'
+                        //     }
+                        // ]
                     },
                     {
                         icon: 'el-ali-slidebar_anliguanli',
