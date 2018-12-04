@@ -501,7 +501,7 @@ a.md-toc-inner {
   background: transparent;
 }
 /** Table 表格样式 **/
- table{
+ /* table{
     border-collapse: collapse;
     width:100%;
     border:1px solid #c6c6c6 !important;
@@ -532,7 +532,7 @@ a.md-toc-inner {
 }
  table tr:nth-child(even){
     background-color: #f8f8f8 !important;
-}
+} */
 
 /*.file-node-icon.fa.fa-folder:before {
   content: "\f114";

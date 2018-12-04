@@ -48,6 +48,6 @@
         }
     }
 </script>
-<style>
+<style slot-scope="">
     @import '../../assets/css/main.css';
 </style>

@@ -3,12 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import './assets/css/mavon.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import store from './vuex/store'
 import hljs from 'highlight.js';
 import './assets/css/icon/iconfont.css'
+
 // 添加自定义过滤器
 import * as filters from './filters/'
 Object.keys(filters).forEach((key)=>{

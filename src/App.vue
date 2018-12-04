@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="{'background':bgcolor}">
 		<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href="http://zhaohs.cn/css/mavon.css" rel="stylesheet">
+		
     <router-view/>
   </div>
 </template>

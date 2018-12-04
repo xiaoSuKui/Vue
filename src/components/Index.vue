@@ -114,7 +114,8 @@
 }
 .m_right>.about h3,.m_right>.hot h3,.m_right>.links h3 {
     line-height: 40px;
-    color: #38485A;
+    color: #000000;
+    font-weight:350;
     font-size: 18px;
     border-bottom: 1px solid #E6E6E6;
     height: 40px;

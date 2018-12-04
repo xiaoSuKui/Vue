@@ -36,7 +36,6 @@
 </template>
 <script>
 import { mavonEditor } from 'mavon-editor'
-
 import 'mavon-editor/dist/css/index.css'
 import Message from '@/components/Message'
 import 'highlight.js/styles/github.css'
@@ -72,6 +71,38 @@ import 'highlight.js/styles/github.css'
 </script>
 
 <style>
+table{
+    border-collapse: collapse;
+    width:100%;
+    border:1px solid #c6c6c6 !important;
+    margin-bottom:20px;
+}
+ table th{
+    border-collapse: collapse;
+    border-right:1px solid #c6c6c6 !important;
+    border-bottom:1px solid #c6c6c6 !important;
+    background-color:#ddeeff !important; 
+    padding:5px 9px;
+    font-size:14px;
+    font-weight:normal;
+    text-align:center;
+}
+ table td{
+    border-collapse: collapse;
+    border-right:1px solid #c6c6c6 !important;
+    border-bottom:1px solid #c6c6c6 !important; 
+    padding:5px 9px;
+    font-size:12px;
+    font-weight:normal;
+    text-align:center;
+    word-break: break-all;
+}
+ table tr:nth-child(odd){
+    background-color:#fff !important; 
+}
+ table tr:nth-child(even){
+    background-color: #f8f8f8 !important;
+}
 pre{
     white-space: pre-wrap;
     word-wrap: break-word;

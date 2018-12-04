@@ -5,21 +5,28 @@
     size="medium"
     :default-sort = "{prop: 'date', order: 'descending'}"
     >
+    <el-table-column type="selection" :show-overflow-tooltip="true"></el-table-column>
     <el-table-column
-      prop="date"
+      prop="aid"
+      label="ID"
+      sortable
+      >
+    </el-table-column>
+    <el-table-column
+      prop="posted_time"
       label="日期"
       sortable
-      width="180">
+      >
     </el-table-column>
     <el-table-column
-      prop="name"
-      label="姓名"
+      prop="title"
+      label="标题"
       sortable
-      width="180">
+     >
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="地址"
+      prop="md"
+      label="内容"
       >
     </el-table-column>
   </el-table>
@@ -35,7 +42,7 @@ export default {
   mounted:function(){
     this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=/skill&num=0').then((res)=>{
       console.log(res);
-      this.skillData=res;
+      this.skillData=res.data.data;
     })
   }
 }
