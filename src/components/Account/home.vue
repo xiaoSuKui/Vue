@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<script>
+<script >
     import vHead from './Header.vue';
     import vSidebar from './Sidebar.vue';
     import vTags from './Tags.vue';
@@ -48,6 +48,6 @@
         }
     }
 </script>
-<style slot-scope="">
+<style scoped slot-scope="">
     @import '../../assets/css/main.css';
 </style>

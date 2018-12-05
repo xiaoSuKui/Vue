@@ -47,6 +47,12 @@
       >
     </el-table-column>
   </el-table>
+    <el-pagination
+      style="text-align:right"
+      :page-size="10"
+      layout="prev, pager, next, jumper"
+      :total="count">
+    </el-pagination>
 </div>
 </template> 
 <script>
@@ -55,13 +61,15 @@ export default {
   data(){
     return {
       search:"",
-      skillData:[]
+      skillData:[],
+      count:0,
     }
   },
   mounted:function(){
     this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=all&num=0').then((res)=>{
       console.log(res);
       this.skillData=res.data.data;
+      this.count=parseInt(res.data.count[0]);
     })
   },
   methods:{
