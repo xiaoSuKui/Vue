@@ -99,7 +99,7 @@
 <style>
     .tags {
         position: relative;
-        height: 30px;
+        height: 33px;
         overflow: hidden;
         background: #fff;
         padding-right: 120px;
@@ -110,6 +110,8 @@
         box-sizing: border-box;
         width: 100%;
         height: 100%;
+        margin:0;
+        padding:0;
     }
 
     .tags-li {
