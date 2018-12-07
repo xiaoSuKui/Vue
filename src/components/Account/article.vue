@@ -181,4 +181,7 @@ export default {
     height: 178px;
     display: block;
   }
+  .el-upload{
+      border: 2px dotted #FFFFFF;
+  }
 </style>
