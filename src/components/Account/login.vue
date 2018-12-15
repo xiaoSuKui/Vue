@@ -32,15 +32,23 @@
          this.$http.post(this.$store.state.hostaddr+'/account/login.php',formdata).then((res)=>{
            console.log(res);
            if(res.data.code==1){
-              sessionStorage.setItem("uid",res.data.uid);
-              sessionStorage.setItem("uname",'admin');
+              sessionStorage.setItem("blogUid",res.data.uid);
+              sessionStorage.setItem("blogUname",res.data.uname);
               location.assign("/account");
            }else{
-             alert("用户名或密码不正确");
+            this.$message({
+              showClose: true,
+              message: '用户名或密码不正确',
+              type: 'error'
+            });
            }
          })
        }else{
-         alert("请输入账号或密码");
+        this.$message({
+              showClose: true,
+              message: '请输入账号或密码',
+              type: 'error'
+            });
        }
      }
     }

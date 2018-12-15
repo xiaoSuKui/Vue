@@ -20,7 +20,7 @@
             </el-form-item>
             <el-form-item label="文章内容">
                 <div id="editor">
-                    <mavon-editor style="height: 100%" v-on:change="gain" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel" ></mavon-editor>
+                    <mavon-editor style="height: 100%" :value="form.md" v-on:change="gain" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel" ></mavon-editor>
                 </div>
             </el-form-item>
             <el-form-item label="发表时间">
@@ -46,6 +46,7 @@
                 <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
         </el-form>
+        <!-- <button @click="onClick">click me</button> -->
     </div>
 </template>
 <script>
@@ -59,7 +60,6 @@ export default {
         form: {
             title:'',
             md:"",
-            
             date:"",
             classify:"1",
             stick:0,
@@ -69,6 +69,9 @@ export default {
         i:true,
         img_file:{}
       }
+    },
+    beforeMount:function(){
+
     },
     methods: {
         imgurl(file,filelist){
@@ -104,10 +107,16 @@ export default {
             console.log(this.$refs.upload);
             this.form.imageUrl = res;
             this.i=false;
+            if(!this.form.date) this.form.date=new Date().getTime();
             this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
-                console.log(response.data);
-                location.assign("/home");
-             })
+            console.log(response.data);
+            if(response.data.code==1){
+                this.$message({message: '发表成功',type: 'success'});
+            }else{
+                this.$message.error('发表失败'+response.data);
+            }
+            //location.assign("/home");
+            })
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg'||'image/png';
@@ -123,7 +132,6 @@ export default {
         },
         gain(value,reder){
             this.form.md=value;
-            
         },
         onSubmit() {
             if(!this.form.date) this.form.date=new Date().getTime();

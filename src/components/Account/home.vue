@@ -27,6 +27,21 @@
                 collapse: false
             }
         },
+        beforeCreate() {
+            if(sessionStorage.getItem('blogUid')){
+                this.$http.get(this.$store.state.hostaddr+'/account/isLogin.php').then((res)=>{
+                    if(res.data.ok!=0){
+                        console.log(res.data.ok);
+                    }else{
+                        //location.assign("/login");
+                        //alert("您没有权限进入此页面");
+                    }
+                })
+            }else{
+                location.assign("/login");
+                alert("您没有权限进入此页面");
+            }
+        },
         components:{
             vHead, vSidebar, vTags
         },
@@ -37,13 +52,13 @@
 
             // 只有在标签页列表里的页面才使用keep-alive，即关闭标签之后就不保存到内存中了。
             bus.$on('tags', msg => {
-                console.log(msg);
+                //console.log(msg);
                 let arr = [];
                 for(let i = 0, len = msg.length; i < len; i ++){
                     msg[i].name && arr.push(msg[i].name);
                 }
                 this.tagsList = arr;
-                console.log(this.tagsList);
+                //console.log(this.tagsList);
             })
         }
     }

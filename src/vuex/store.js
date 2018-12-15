@@ -9,6 +9,14 @@ const state={
     // 服务器地址
     hostaddr:'http://zhaohs.cn/data',
     count:0,        //文章总数
+    //储存编辑的文章
+    article_list:{
+        id:'',
+        title:'',
+        md:'',
+        img:'',
+        classify:1, //分类
+    },
 }
 const mutations={
     // 改变/更新导航地址调用的方法

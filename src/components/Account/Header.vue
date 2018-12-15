@@ -52,13 +52,13 @@
             return {
                 collapse: false,
                 fullscreen: false,
-                name: '赵恒盛',
+                name: '无名用户',
                 message: 2
             }
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
+                let username = sessionStorage.getItem('blogUname');
                 return username ? username : this.name;
             }
         },

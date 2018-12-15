@@ -52,10 +52,10 @@ export default new Router({
       },
       component:AccountHome,
       children:[
-        {path:'/',redirect:'/Account/article',meta:{title: '文章编辑'}},
+        {path:'/',redirect:'/Account/article',name:'account',meta:{title: '文章编辑',aid:''}},
         {path:'/Account/allList',component:AllList,meta:{title:'文章列表'}},
         {path:'/Account/home',component:AccountHome,meta:{title:'主页'}},
-        {path:'/Account/article',component:AccountArticle,meta:{title: '文章编辑'}}
+        {path:'/Account/article',component:AccountArticle,name:'account',meta:{title: '文章编辑',aid:''}}
       ]
     },
     {
