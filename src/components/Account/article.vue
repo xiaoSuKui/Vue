@@ -118,7 +118,7 @@ export default {
             this.form.imageUrl = res;
             this.i=false;
             if(!this.form.date) this.form.date=new Date().getTime();
-            this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
+            this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)+this.form.aid==0?'':'&aid='+encodeURIComponent(this.form.aid)).then((response)=>{
             console.log(response.data);
             if(response.data.code==1){
                 this.$message({message: response.data.msg,type: 'success'});
@@ -146,7 +146,7 @@ export default {
         onSubmit() {
             if(!this.form.date) this.form.date=new Date().getTime();
             if(this.$refs.upload.$data.uploadFiles.length==0){
-                this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
+                this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)+this.form.aid==0?'':'&aid='+encodeURIComponent(this.form.aid)).then((response)=>{
                 console.log(response.data);
                 if(response.data.code==1){
                     this.$message({message: response.data.msg,type: 'success'});
