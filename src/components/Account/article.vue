@@ -55,23 +55,33 @@ import 'mavon-editor/dist/css/index.css'
 import axios from 'axios'
 export default {
     name:"article_acc",
+    props:['list_msg'],     //从列表页传来的数据
      data() {
       return {
         form: {
             title:'',
             md:"",
             date:"",
-            classify:"1",
+            classify:"1",   
             stick:0,
             imageUrl: '',
+            aid:0,
         },
-        classify:[],
-        i:true,
+        classify:[],    //分类列表数据
+        i:true,         //
         img_file:{}
       }
     },
     beforeMount:function(){
-
+        console.log(this.list_msg);
+        if(this.list_msg!=undefined){
+            this.form.title=this.list_msg.title,
+            this.form.md=this.list_msg.md,
+            this.form.classify=this.list_msg.classify,
+            this.form.imageUrl=this.list_msg.imageUrl,
+            this.form.stick=this.list_msg.stick,
+            this.form.aid=this.list_msg.aid;
+        }
     },
     methods: {
         imgurl(file,filelist){
@@ -111,9 +121,9 @@ export default {
             this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
             console.log(response.data);
             if(response.data.code==1){
-                this.$message({message: '发表成功',type: 'success'});
+                this.$message({message: response.data.msg,type: 'success'});
             }else{
-                this.$message.error('发表失败'+response.data);
+                this.$message.error(response.data);
             }
             //location.assign("/home");
             })
@@ -139,9 +149,9 @@ export default {
                 this.$http.post(this.$store.state.hostaddr+'/account/article.php?title='+encodeURIComponent(this.form.title)+'&md='+encodeURIComponent(this.form.md)+'&posted_time='+this.form.date+'&category_id='+this.form.classify+'&stick='+Number(this.form.stick)+'&accessory='+encodeURIComponent(this.form.imageUrl)).then((response)=>{
                 console.log(response.data);
                 if(response.data.code==1){
-                    this.$message({message: '发表成功',type: 'success'});
+                    this.$message({message: response.data.msg,type: 'success'});
                 }else{
-                    this.$message.error('发表失败'+response.data);
+                    this.$message.error(response.data);
                 }
                 //location.assign("/home");
              })
