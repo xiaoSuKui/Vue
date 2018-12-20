@@ -8,9 +8,14 @@
                 <el-upload
                 ref="upload"
                 class="avatar-uploader"
+                :multiple="false"
+                :limit=2
+                accept="image/*"
+                :on-exceed="onExceed"
                 :action="$store.state.hostaddr+'/uploadImg.php'"
                 :auto-upload="false"
                 :on-change="imgurl"
+                :file-list="updateImgList"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
@@ -67,8 +72,8 @@ export default {
             imageUrl: '',
             aid:0,
         },
+        updateImgList:[],   //上传图片列表
         classify:[],    //分类列表数据
-        i:true,         //
         img_file:{}
       }
     },
@@ -85,8 +90,10 @@ export default {
     },
     methods: {
         imgurl(file,filelist){
-            if(this.i){
-                this.form.imageUrl=file.url;
+            console.log(file);
+            this.form.imageUrl=file.url;
+            if(filelist.length>1){
+                filelist.pop();
             }
         },
          // 绑定@imgAdd event
@@ -113,6 +120,14 @@ export default {
         up(file){
             this.$refs.upload.submit();
         },
+        //超出上传文件个数
+        onExceed(file,filelist){
+            
+            filelist.push(file);
+            //filelist=[];
+            //console.log(file,filelist);
+            //filelist[0]=file[0];
+        },
         handleAvatarSuccess(res, file,$e) {
             console.log(this.$refs.upload);
             this.form.imageUrl = res;
@@ -122,6 +137,15 @@ export default {
             console.log(response.data);
             if(response.data.code==1){
                 this.$message({message: response.data.msg,type: 'success'});
+                this.form={
+                        title:'',
+                        md:"",
+                        date:"",
+                        classify:"1",   
+                        stick:0,
+                        imageUrl: '',
+                        aid:0,
+                    };
                 this.$store.state.dialogFormVisible = false;    //关闭列表页遮罩
             }else{
                 this.$message.error(response.data);
@@ -151,6 +175,15 @@ export default {
                 console.log(response.data);
                 if(response.data.code==1){
                     this.$message({message: response.data.msg,type: 'success'});
+                    this.form={
+                        title:'',
+                        md:"",
+                        date:"",
+                        classify:"1",   
+                        stick:0,
+                        imageUrl: '',
+                        aid:0,
+                    };
                     this.$store.state.dialogFormVisible = false;
                 }else{
                     this.$message.error(response.data);
