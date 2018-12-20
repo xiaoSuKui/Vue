@@ -9,14 +9,7 @@ const state={
     // 服务器地址
     hostaddr:'http://zhaohs.cn/data',
     count:0,        //文章总数
-    //储存编辑的文章
-    article_list:{
-        id:'',
-        title:'',
-        md:'',
-        img:'',
-        classify:1, //分类
-    },
+    dialogFormVisible:false,    //控制后台文章列表的遮罩层是否显示
 }
 const mutations={
     // 改变/更新导航地址调用的方法
