@@ -101,29 +101,23 @@ export default {
                             message: '已加载上次数据'
                         });
                     this.form.md=window.localStorage.blog_md;
-                    this.timer="";
-                    this.timer=window.setInterval(()=>{
-                        window.localStorage.blog_md=this.form.md;
-                    }, 1000*60*5)   //每五分钟执行一次
                 }).catch(() => {
                         this.$message({
                             type: 'info',
                             message: '已取消加载上次数据'
                         });
-                        this.timer="";
-                        this.timer=window.setInterval(()=>{
-                        window.localStorage.blog_md=this.form.md;
-                    }, 1000*60*5);
                 })
             }
         }
+        this.timer="";
+        this.timer=window.setInterval(()=>{
+            window.localStorage.blog_title=this.form.title;
+            window.localStorage.blog_md=this.form.md;
+        }, 1000*60*5);
     },
     methods: {
         mdSave(val,render){
-            this.timer="";
-            this.timer=window.setInterval(()=>{
-             window.localStorage.blog_md=this.form.md;
-            }, 1000*60*5);
+            window.localStorage.blog_title=this.form.title;
             window.localStorage.blog_md=val;
         },
         imgurl(file,filelist){
@@ -184,8 +178,11 @@ export default {
                         aid:0,
                     };
                 this.$store.state.dialogFormVisible = false;    //关闭列表页遮罩
-                this.$refs.upload.$data.uploadFiles.pop();
-                window.localStorage.removeItem("blog_md");
+                this.$refs.upload.$data.uploadFiles.pop();  //移除上次添加的图片
+                //清除保存在storg里的数据和定时器
+                window.localStorage.removeItem("blog_md");  
+                    this.timer="";
+                    window.localStorage.removeItem("blog_title"); 
             }else{
                 this.$message.error(response.data);
             }
@@ -225,7 +222,9 @@ export default {
                         aid:0,
                     };
                     this.$store.state.dialogFormVisible = false;
-                    window.localStorage.removeItem("blog_md");  
+                    window.localStorage.removeItem("blog_md");
+                    this.timer="";
+                    window.localStorage.removeItem("blog_title");  
                 }else{
                     this.$message.error(response.data);
                 }
