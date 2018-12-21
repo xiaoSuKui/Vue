@@ -18,6 +18,7 @@
     size="medium"
     height="72vh"
     :default-sort = "{prop: 'date', order: 'descending'}"
+    @selection-change="onSeleChange"
     >
     <el-table-column type="selection" :show-overflow-tooltip="true"></el-table-column>
     <el-table-column
@@ -74,7 +75,7 @@
     </el-table-column>
   </el-table>
     <div style="width:25%;float:left;margin-top:5px;">
-      <el-button type="danger" icon="el-icon-delete" size="small" plain>批量删除</el-button>
+      <el-button type="danger" @click="batchDelete" icon="el-icon-delete" size="small" plain>批量删除</el-button>
     </div>
     <el-pagination
       style="text-align: right;width: 70%;float: right;"
@@ -117,6 +118,7 @@ export default {
       pageSize:10,  //每页条数
       loading:true, //控制loading遮罩的显示
       hackReset:true, //控制AccountArticle组件的创建与销毁
+      clickAid:"",    //选中的列表数据的aid集合,逗号隔开
     }
   },
   mounted:function(){
@@ -214,6 +216,51 @@ export default {
         this.skillData=res.data.data;
         this.loading=false;
       })
+    },
+    //表格选中数据改变时触发
+    onSeleChange(selection){
+      //console.log(selection);
+      let aidArr="";
+      for(let val of selection){
+        aidArr+=val.aid+",";
+      }
+      this.clickAid=aidArr;
+    },
+    //批量删除
+    batchDelete(){
+      this.$confirm('此操作将删除选中所有数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http.post(this.$store.state.hostaddr+'/account/deleteArticle.php?aid='+this.clickAid).then((res)=>{
+            if(res.data.code==1){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              //刷新列表
+              this.loading=true;
+              this.$http.get(this.$store.state.hostaddr+'/article/articleList.php?path=all&num=0').then((res)=>{
+                console.log(res);
+                this.skillData=res.data.data;
+                this.count=parseInt(res.data.count[0]);
+                this.loading=false;
+              })
+            }else{
+              this.$message({
+                type: 'error',
+                message: '删除失败'
+              });  
+            }
+          })
+          
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        })
     },
     //分类筛选
     filterTag(value,row,column){
